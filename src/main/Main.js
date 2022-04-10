@@ -16,8 +16,10 @@ import planetList from "../planetList"
 // ];
 
 const Main = () => {
-  const [weight, setWeight] = useState("select planet");
+  const [weight, setWeight] = useState("select weight");
   const [planet, setPlanet] = useState("select planet");
+  const [result,setResult]=useState(0)
+  const [isInvalid,setIsInvalid]=useState(true)
   
 
   const handlePlanet = (e) => {
@@ -28,9 +30,26 @@ const Main = () => {
     setWeight(e.target.value);
   };
 
-  const handleButton = () => {};
+  const handleButton = () => {
+    if(planet=='select planet' ||weight=='select weight'){
+      setIsInvalid(true)
+    }
+    else if(!weight|| !planet){
+
+      setIsInvalid(true)
+    }
+    else if (weight && planet){
+      const res=planetList.filter((curElem)=>curElem.planetName===planet)
+      console.log(planet,res)
+      setResult(res[0])
+      setIsInvalid(false)
+    }
+    
+    
+  };
 
   return (
+    <>
     <div className="main-background">
       <div className="heading">Calculate weight of an object on planet.</div>
       <div className="inputContainer">
@@ -38,6 +57,7 @@ const Main = () => {
           type="number"
           name="weight"
           className="weight"
+          min='0'
           value={weight}
           onChange={handleWeight}
           placeholder="enter weight"
@@ -49,6 +69,7 @@ const Main = () => {
           className="planet"
           onChange={handlePlanet}
         >
+          <option value="selectPlanet">--selectPlanet--</option>
           {planetList.map((curElem) => {
             return <option value={curElem.planetName} key={curElem.id}>{curElem.planetName}</option>;
           })}
@@ -58,26 +79,35 @@ const Main = () => {
         </button>
       </div>
 
-      {/* <div className="invalid-card">
-        <div className="invalid">weight is required
+      {isInvalid ?
+
+       <div className="invalid-card">
+        <div className="invalid">
+          <span className="sp">weight and planet both are required</span>
         </div>
-      </div> */}
+      </div> 
+
+      :
 
       <div className="valid-card">
-        <div className="picture">
-          <img src='../images/moon.png' alt="img"/>
+        <div className="picture">  
+        {console.log(typeof result.path)}
+          <img src={require(`../images/${result.planetName}.png`)} alt="img"/>
         </div>
         <div className="main-result-container">
             <div className="result-sq">
-              <div className="sq-content">The weight of the object on Pluto is</div>
+              <div className="sq-content">The weight of the object on {result.planetName} is</div>
               <div className="circle-center">
-              <div className="circle">7.00
+              <div className="circle">{result.factor*weight}
               </div>
               </div>
             </div>
         </div>
       </div>
+}
     </div>
+    
+    </>
   );
 };
 
