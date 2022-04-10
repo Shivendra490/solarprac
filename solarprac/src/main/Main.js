@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./main.css";
 import planetList from "../planetList";
-import earth from "../images/earth.png";
 
 // const planetList = [
 //   "earth",
@@ -18,7 +17,7 @@ import earth from "../images/earth.png";
 
 const Main = () => {
   const [weight, setWeight] = useState("select planet");
-  const [planet, setPlanet] = useState("select planet");
+  const [planet, setPlanet] = useState("venus");
 
   const handlePlanet = (e) => {
     setPlanet(e.target.value);
@@ -29,6 +28,7 @@ const Main = () => {
   };
 
   const handleButton = () => {};
+
 
   return (
     <div className="main-background">
@@ -69,7 +69,7 @@ const Main = () => {
 
       <div className="valid-card">
         <div className="picture">
-          <img src={earth} alt="img" />
+          <img src={require(`../images/${planet}.png`)} alt="img" />
         </div>
         <div className="main-result-container">
           <div className="result-sq">
