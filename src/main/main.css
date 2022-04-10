@@ -129,7 +129,7 @@ align-items:center;
     align-items: center;
 }
 
-.circle{
+/* .circle{
     
     width:7vw;
     height:7vw;
@@ -143,5 +143,7 @@ align-items:center;
     font-size: 12px;
     display:grid;
     place-content: center;
-}
+} */
+
+
 

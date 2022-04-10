@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./main.css";
 import planetList from "../planetList"
+import styledComponents from "styled-components";
 
 // const planetList = [
 //   "earth",
@@ -47,6 +48,20 @@ const Main = () => {
     
     
   };
+
+  const Circle=styledComponents.div`
+    width:7vw;
+    height:7vw;
+    border-radius: 50%;
+    border:2px solid white;
+    text-align:center;
+    
+    color:white;
+    opacity: 1;
+    overflow:hidden;
+    font-size: 12px;
+    display:grid;
+    place-content: center;`
 
   return (
     <>
@@ -98,8 +113,8 @@ const Main = () => {
             <div className="result-sq">
               <div className="sq-content">The weight of the object on {result.planetName} is</div>
               <div className="circle-center">
-              <div className="circle">{result.factor*weight}
-              </div>
+              <Circle>{result.factor*weight}
+              </Circle>
               </div>
             </div>
         </div>
